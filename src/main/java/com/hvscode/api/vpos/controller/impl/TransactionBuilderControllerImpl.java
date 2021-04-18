@@ -18,8 +18,7 @@ public class TransactionBuilderControllerImpl implements TransactionBuilderContr
     }
 
     @PostMapping(value = "/prepare", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String prepare(Transaction transaction){
-
+    public String prepare(@RequestBody Transaction transaction){
         return transactionService.prepare(transaction);
 
     }

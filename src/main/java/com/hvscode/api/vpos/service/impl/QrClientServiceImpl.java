@@ -3,6 +3,7 @@ package com.hvscode.api.vpos.service.impl;
 import com.hvscode.api.vpos.controller.Config;
 import com.hvscode.api.vpos.controller.entity.BarCode;
 import com.hvscode.api.vpos.controller.entity.Message;
+import com.hvscode.api.vpos.controller.entity.Transaction;
 import com.hvscode.api.vpos.service.QrClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -30,11 +31,9 @@ public class QrClientServiceImpl implements QrClientService {
     }
 
     @Override
-    public String buildQr(long tranId) {
+    public String buildQr(Transaction transaction) {
 
-        String urlTransaction = config.getQrContentBase().concat(String.valueOf(tranId));
-
-        HttpEntity<String> requestBody = new HttpEntity<>(urlTransaction);
+        HttpEntity<String> requestBody = new HttpEntity<>(transaction.getLink());
 
 
         Message<BarCode> message = restTemplate.exchange(config.getApiQrUrl(),
